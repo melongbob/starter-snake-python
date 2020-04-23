@@ -57,8 +57,7 @@ def move():
         move = "down"
     elif head["x"] == data["board"]["width"] - 1:
         move = "up"
-
-    if head["y"] == 0:
+    elif head["y"] == 0:
         move = "left"
     elif head["y"] == data["board"]["height"] - 1:
         move = "right"
