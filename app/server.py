@@ -61,6 +61,10 @@ def move():
         move = "down"
     if head["y"] == data["board"]["height"] - 1:
         move = "right"
+    if head["x"] == data["board"]["width"] - 1 
+        and head["y"] == data["board"]["height"] - 1:
+        move = "up"
+    
 
     print("MOVE:", json.dumps(data))
 
