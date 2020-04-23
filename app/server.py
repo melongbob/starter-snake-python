@@ -51,6 +51,8 @@ def move():
 
     head = data["you"]["body"][0]
 
+    move = "right"
+    
     if head["x"] == 0:
         move = "left"
     else if head == data["board"]["width"] - 1:
