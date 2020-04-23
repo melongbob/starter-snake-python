@@ -52,15 +52,15 @@ def move():
     head = data["you"]["body"][0]
 
     move = "right"
-    
+
     if head["x"] == 0:
-        move = "left"
-    else if head == data["board"]["width"] - 1:
+        move = "down"
+    else if head["x"] == data["board"]["width"] - 1:
         move = "up"
 
     if head["y"] == 0:
-        move = "down"
-    if head == data["board"]["height"] - 1:
+        move = "left"
+    if head["y"] == data["board"]["height"] - 1:
         move = "right"
 
     print("MOVE:", json.dumps(data))
