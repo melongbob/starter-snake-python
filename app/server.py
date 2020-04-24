@@ -59,7 +59,7 @@ def move():
     food = data["board"]["food"][0]
 
     for it in range(10):
-        if health <= 20:
+        if health <= 20 or data["turn"] < 20:
             move = random.choice(moves)
         else:
             move = moves[it % 4]
