@@ -92,8 +92,8 @@ def isOffBoard(data, coord):
 def isSnake(coord, snakes):
     for snake in snakes:
         if coord in snake["body"]:
-            return False
-    return True
+            return True
+    return False
 
 @bottle.post("/end")
 def end():
