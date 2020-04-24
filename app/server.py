@@ -64,7 +64,7 @@ def move():
         else:
             move = moves[it % 4]
 
-        if data["turn"] <= 30:
+        if data["turn"] <= 100:
             move = random.choice(moves)
         
         coord = moveAsCoord(move, head)
