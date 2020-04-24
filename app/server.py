@@ -60,12 +60,12 @@ def move():
 
     for it in range(100):
         if health <= 20:
-            move = towardsFood(findFood(food, head), head)
+            move = random.choice(moves)
         else:
             move = moves[it % 4]
 
-        if data["turn"] <= 100:
-            move = random.choice(moves)
+        if data["turn"] <= 30:
+            move = towardsFood(findFood(food, head), head)
         
         coord = moveAsCoord(move, head)
         if isValidMove(move, head, board, coord, snakes):
