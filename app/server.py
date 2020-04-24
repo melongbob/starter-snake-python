@@ -73,17 +73,15 @@ def move():
     )
 
 def moveAsCoord(move, head):
-    switch (move) {
-        case "up":
-            return {x: head["x"], y: head["y"] - 1};
-        case "down":
-            return {x: head["x"], y: head["y"] + 1};
-        case "right":
-            return {x: head["x"] + 1, y: head["y"]};
-        case "left":
-            return {x: head["x"] - 1, y: head["y"]};
-        default:
-            return {x: head["x"], y: head["y"] - 1};
+    
+    if move == "up":
+        return {x: head["x"], y: head["y"] - 1}
+    elif move == "down":
+        return {x: head["x"], y: head["y"] + 1}
+    elif move == "right":
+        return {x: head["x"] + 1, y: head["y"]}
+    elif move == "left":
+        return {x: head["x"] - 1, y: head["y"]}
     }
 
 def isOffBoard(data, coord):
