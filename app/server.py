@@ -58,13 +58,11 @@ def move():
     snakes = data["board"]["snakes"]
     food = data["board"]["food"]
 
-    it = data["turn"]
-    for _ in range(10):
+    for it in range(100):
         if health <= 30:
             move = random.choice(moves)
         else:
             move = moves[it % 4]
-            it = it + 1
 
         if data["turn"] <= 50:
             move = random.choice(moves)
