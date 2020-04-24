@@ -46,7 +46,7 @@ def move():
     data = bottle.request.json
 
     # Choose a random direction to move in
-    moves = ["up", "left", "down", "right"]
+    moves = ["up", "down", "right", "left"]
 
     # Shouts are messages sent to all the other snakes in the game.
     # Shouts are not displayed on the game board.
@@ -58,14 +58,16 @@ def move():
     snakes = data["board"]["snakes"]
     food = data["board"]["food"]
 
-    for it in range(100):
-        if health <= 20:
+    it = turn
+    for _ in range(10):
+        if health <= 30:
             move = random.choice(moves)
         else:
             move = moves[it % 4]
+            it = it + 1
 
-        if data["turn"] <= 30:
-            move = towardsFood(findFood(food, head), head)
+        if data["turn"] <= 50:
+            move = random.choice(moves)
         
         coord = moveAsCoord(move, head)
         if isValidMove(move, head, board, coord, snakes):
@@ -96,26 +98,6 @@ def isValidMove(move, head, board, coord, snakes):
         return True
     else:
         return False
-
-def findFood(food, head):
-    min = 50
-    idx = 0
-    for i in len(food):
-        dist = food[i]["x"] - head["x"] + food[i]["y"] - head["y"]
-        if dist < min:
-            min = dist
-            idx = i
-    return {"x": food[i]["x"], "y": food[i]["y"]}
-
-def towardsFood(food, head):
-    if food["x"] < head["x"]:
-        return "left"
-    if food["x"] > head["x"]:
-        return "right"
-    if food["y"] < head["y"]:
-        return "up"
-    if food["y"] > head["y"]:
-        return "down"
 
 def isOffBoard(board, coord):
     if coord["x"] < 0: return True
