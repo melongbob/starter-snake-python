@@ -51,16 +51,21 @@ def move():
 
     # Shouts are messages sent to all the other snakes in the game.
     # Shouts are not displayed on the game board.
-    shout = "I am a python snake!"
+    shout = "I am Curly the snake!"
 
     head = data["you"]["body"][0]
     neck = data["you"]["body"][1]
+    food = data["board"]["food"][0]
 
     for move in moves :
         coord = moveAsCoord(move, head)
+        if data["you"]["health"] < 50:
+            if towardsFood(food, coord, head) and not isOffBoard(data, coord) and not isNeck(coord, neck):
+                response = {"move": move, "shout": shout}
+                break
         if not isOffBoard(data, coord) and not isNeck(coord, neck):
             response = {"move": move, "shout": shout}
-            break
+            break  
 
     print("MOVE:", json.dumps(data))
 
@@ -89,6 +94,13 @@ def isOffBoard(data, coord):
 
 def isNeck(a, b):
     return a["x"] == b["x"] and a["y"] == b["y"]
+
+def towardsFood(food, coord, head):
+    if food["x"] - head["x"] >= food["x"] - coord["x"]\
+        and food["y"] - head["y"] >= food["y"] - coord["y"]:
+        return True
+    else:
+        return False
 
 @bottle.post("/end")
 def end():
