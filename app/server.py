@@ -72,17 +72,17 @@ def move():
     )
 
 def isOffBoard(move, head):
-    switch(move){
-        case 'up':
-            return {x: head["x"], y: head["y"] - 1}
-        case 'down':
-            return {x: head["x"], y: head["y"] + 1}
-        case 'right':
-            return {x: head["x"] + 1, y: head["y"]}
-        case 'left':
-            return {x: head["x"] - 1, y: head["y"]}
+    switch (move) {
+        case "up":
+            return {x: head["x"], y: head["y"] - 1};
+        case "down":
+            return {x: head["x"], y: head["y"] + 1};
+        case "right":
+            return {x: head["x"] + 1, y: head["y"]};
+        case "left":
+            return {x: head["x"] - 1, y: head["y"]};
     }
-    
+
 def isNeck(move, neck):
     return move["x"] == neck["x"] and move["y"] == neck["y"]
 
