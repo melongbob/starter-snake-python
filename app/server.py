@@ -60,6 +60,7 @@ def move():
         coord = moveAsCoord(move, head)
         if not isOffBoard(data, coord) and not isNeck(coord, neck):
             response = {"move": move, "shout": shout}
+            break
 
     print("MOVE:", json.dumps(data))
 
