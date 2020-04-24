@@ -49,23 +49,20 @@ def move():
     moves = ["up", "down", "right", "left"]
     #move = random.choice(directions)
 
+    # Shouts are messages sent to all the other snakes in the game.
+    # Shouts are not displayed on the game board.
+    shout = "I am a python snake!"
+
     head = data["you"]["body"][0]
     neck = data["you"]["body"][1]
 
     for move in moves :
         coord = moveAsCoord(move, head)
-        if not isOffBoard(data, coord) and not isNeck(coord, neck) :
-            return {move: move}
-            
-    return {move: "up"}
+        if not isOffBoard(data, coord) and not isNeck(coord, neck):
+            response = {"move": move, "shout": shout}
 
     print("MOVE:", json.dumps(data))
 
-    # Shouts are messages sent to all the other snakes in the game.
-    # Shouts are not displayed on the game board.
-    shout = "I am a python snake!"
-
-    response = {"move": move, "shout": shout}
     return HTTPResponse(
         status=200,
         headers={"Content-Type": "application/json"},
