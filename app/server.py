@@ -81,11 +81,11 @@ def moveAsCoord(move, head):
         return {"x": head["x"] - 1, "y": head["y"]}
 
 def isOffBoard(data, coord):
-    if coord["x"] < 0: return true
-    if coord["y"] < 0: return true
-    if coord["y"] >= data["board"]["height"]: return true
-    if coord["x"] >= data["board"]["width"]: return true
-    return false
+    if coord["x"] < 0: return True
+    if coord["y"] < 0: return True
+    if coord["y"] >= data["board"]["height"]: return True
+    if coord["x"] >= data["board"]["width"]: return True
+    return False
 
 def isNeck(a, b):
     return a["x"] == b["x"] and a["y"] == b["y"]
