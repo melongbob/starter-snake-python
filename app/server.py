@@ -46,25 +46,17 @@ def move():
     data = bottle.request.json
 
     # Choose a random direction to move in
-    #directions = ["up", "down", "left", "right"]
+    moves = ["up", "down", "right", "left"]
     #move = random.choice(directions)
 
     head = data["you"]["body"][0]
+    neck = data["you"]["body"][1]
 
-    move = "right"
-
-    if head["x"] == data["board"]["width"] - 1:
-        move = "up"
-    if head["y"] == 0:
-        move = "left"
-    if head["x"] == 0:
-        move = "down"
-    if head["y"] == data["board"]["height"] - 1:
-        move = "right"
-    if head["x"] == data["board"]["width"] - 1 \
-        and head["y"] == data["board"]["height"] - 1:
-        move = "up"
-    
+    for move in moves :
+        coord = moveAsCoord(move, head)
+        if not isOffBoard(move, head) \
+            not isNeck(move, neck) :
+            return {move: move}
 
     print("MOVE:", json.dumps(data))
 
@@ -79,6 +71,19 @@ def move():
         body=json.dumps(response),
     )
 
+def isOffBoard(move, head):
+    switch(move):
+        case 'up':
+            return {x: head["x"], y: head["y"] - 1}
+        case 'down':
+            return {x: head["x"], y: head["y"] + 1}
+        case 'right':
+            return {x: head["x"] + 1, y: head["y"]}
+        case 'left':
+            return {x: head["x"] - 1, y: head["y"]}
+
+def isNeck(move, neck):
+    return move["x"] == neck["x"] and move["y"] == neck["y"]
 
 @bottle.post("/end")
 def end():
