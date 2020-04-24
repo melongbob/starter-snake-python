@@ -58,11 +58,11 @@ def move():
     food = data["board"]["food"][0]
 
     for move in moves :
-        coord = moveAsCoord(move, head)
         if data["you"]["health"] < 50:
-            if towardsFood(food, coord, head) and not isOffBoard(data, coord) and not isNeck(coord, neck):
-                response = {"move": move, "shout": shout}
-                break
+            coord = towardfood(food, head)
+        else:
+            coord = moveAsCoord(move, head)
+            
         if not isOffBoard(data, coord) and not isNeck(coord, neck):
             response = {"move": move, "shout": shout}
             break  
@@ -85,6 +85,16 @@ def moveAsCoord(move, head):
     elif move == "left":
         return {"x": head["x"] - 1, "y": head["y"]}
 
+def towardsFood(food, head):
+    if food["x"] < head["x"]:
+        return {"x": head["x"] - 1, "y": head["y"]}
+    if food["x"] > head["x"]:
+        return {"x": head["x"] + 1, "y": head["y"]}
+    if food["y"] > head ["y"]:
+        return {"x": head["x"], "y": head["y"] + 1}
+    if food["y"] < head["y"]:
+        return {"x": head["x"], "y": head["y"] - 1}
+
 def isOffBoard(data, coord):
     if coord["x"] < 0: return True
     if coord["y"] < 0: return True
@@ -94,13 +104,6 @@ def isOffBoard(data, coord):
 
 def isNeck(a, b):
     return a["x"] == b["x"] and a["y"] == b["y"]
-
-def towardsFood(food, coord, head):
-    if food["x"] - head["x"] >= food["x"] - coord["x"]\
-        and food["y"] - head["y"] >= food["y"] - coord["y"]:
-        return True
-    else:
-        return False
 
 @bottle.post("/end")
 def end():
