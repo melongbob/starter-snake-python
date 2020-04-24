@@ -53,12 +53,16 @@ def move():
     shout = "I am Curly the snake!"
 
     head = data["you"]["body"][0]
+    health = data["you"]["health"]
     board = data["board"]
     snakes = data["board"]["snakes"]
     food = data["board"]["food"][0]
 
     for _ in range(10):
-        move = random.choice(moves)
+        if health > 20:
+            move = random.choice(moves)
+        else:
+            move = moves[data["turn"]%4]
         coord = moveAsCoord(move, head)
         if isValidMove(move, head, board, coord, snakes):
             break
