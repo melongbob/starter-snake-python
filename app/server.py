@@ -59,10 +59,10 @@ def move():
 
     for move in moves :
         if data["you"]["health"] < 50:
-            coord = towardfood(food, head)
+            coord = towardsfood(food, head)
         else:
             coord = moveAsCoord(move, head)
-            
+
         if not isOffBoard(data, coord) and not isNeck(coord, neck):
             response = {"move": move, "shout": shout}
             break  
