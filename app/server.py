@@ -54,9 +54,10 @@ def move():
 
     for move in moves :
         coord = moveAsCoord(move, head)
-        if not isOffBoard(move, head) \
-           and not isNeck(move, neck) :
+        if not isOffBoard(data, coord) \
+           and not isNeck(coord, neck) :
             return {move: move}
+        return {move: "up"}
 
     print("MOVE:", json.dumps(data))
 
@@ -71,7 +72,7 @@ def move():
         body=json.dumps(response),
     )
 
-def isOffBoard(move, head):
+def moveAsCoord(move, head):
     switch (move) {
         case "up":
             return {x: head["x"], y: head["y"] - 1};
@@ -85,8 +86,15 @@ def isOffBoard(move, head):
             return {x: head["x"], y: head["y"] - 1};
     }
 
-def isNeck(move, neck):
-    return move["x"] == neck["x"] and move["y"] == neck["y"]
+def isOffBoard(data, coord):
+    if(coord.x < 0) return true
+    if(coord.y < 0) return true
+    if(coord.y >= data["board"]["height"]) return true
+    if(coord.x >= data["board"]["width"] return true
+    return false
+
+def isNeck(a, b):
+    return a["x"] == b["x"] and a["y"] == b["y"]
 
 @bottle.post("/end")
 def end():
