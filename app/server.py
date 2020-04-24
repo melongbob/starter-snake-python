@@ -59,7 +59,7 @@ def move():
 
     coord = moveAsCoord(move, head)
     for _ in range(10):
-        move = random.choice(directions)
+        move = random.choice(moves)
         if isValidMove(move, head, board, coord, snakes):
             break
             
