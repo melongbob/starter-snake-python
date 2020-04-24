@@ -46,7 +46,7 @@ def move():
     data = bottle.request.json
 
     # Choose a random direction to move in
-    moves = ["up", "down", "right", "left"]
+    moves = ["up", "left", "down", "right"]
 
     # Shouts are messages sent to all the other snakes in the game.
     # Shouts are not displayed on the game board.
@@ -63,8 +63,7 @@ def move():
         if health < 20:
             move = random.choice(moves)
         else:
-            move = moves[num % 4]
-            num + 1
+            move = moves[data["turn"] % 4]
         coord = moveAsCoord(move, head)
         if isValidMove(move, head, board, coord, snakes):
             break
