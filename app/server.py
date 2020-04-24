@@ -54,8 +54,8 @@ def move():
 
     for move in moves :
         coord = moveAsCoord(move, head)
-        if not isOffBoard(data, coord) \
-           and not isNeck(coord, neck) :
+        if not (isOffBoard(data, coord) \
+           or isNeck(coord, neck)) :
             return {move: move}
         return {move: "up"}
 
