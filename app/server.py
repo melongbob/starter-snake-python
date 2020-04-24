@@ -59,7 +59,7 @@ def move():
 
     for move in moves :
         if data["you"]["health"] < 50:
-            coord = towardsfood(food, head)
+            coord = towardsFood(food, head)
         else:
             coord = moveAsCoord(move, head)
 
