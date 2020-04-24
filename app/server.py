@@ -57,9 +57,9 @@ def move():
     snakes = data["board"]["snakes"]
     food = data["board"]["food"][0]
 
-    coord = moveAsCoord(move, head)
     for _ in range(10):
         move = random.choice(moves)
+        coord = moveAsCoord(move, head)
         if isValidMove(move, head, board, coord, snakes):
             break
             
