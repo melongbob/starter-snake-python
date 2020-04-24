@@ -54,16 +54,13 @@ def move():
     shout = "I am Curly the snake!"
 
     head = data["you"]["body"][0]
-    neck = data["you"]["body"][1]
+    snakes = data["board"]["snakes"]
     food = data["board"]["food"][0]
 
+    ########
     for move in moves :
-        if data["you"]["health"] < 50:
-            coord = towardsFood(food, head)
-        else:
-            coord = moveAsCoord(move, head)
-
-        if not isOffBoard(data, coord) and not isNeck(coord, neck):
+        coord = moveAsCoord(move, head)
+        if not isOffBoard(data, coord) and not isSnake(coord, snakes):
             response = {"move": move, "shout": shout}
             break  
 
@@ -85,16 +82,6 @@ def moveAsCoord(move, head):
     elif move == "left":
         return {"x": head["x"] - 1, "y": head["y"]}
 
-def towardsFood(food, head):
-    if food["x"] < head["x"]:
-        return {"x": head["x"] - 1, "y": head["y"]}
-    if food["x"] > head["x"]:
-        return {"x": head["x"] + 1, "y": head["y"]}
-    if food["y"] > head ["y"]:
-        return {"x": head["x"], "y": head["y"] + 1}
-    if food["y"] < head["y"]:
-        return {"x": head["x"], "y": head["y"] - 1}
-
 def isOffBoard(data, coord):
     if coord["x"] < 0: return True
     if coord["y"] < 0: return True
@@ -102,8 +89,11 @@ def isOffBoard(data, coord):
     if coord["x"] >= data["board"]["width"]: return True
     return False
 
-def isNeck(a, b):
-    return a["x"] == b["x"] and a["y"] == b["y"]
+def isSnake(coord, snakes):
+    for snake in snakes:
+        if coord in snake["body"]:
+            return False
+    return True
 
 @bottle.post("/end")
 def end():
