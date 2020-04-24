@@ -58,11 +58,13 @@ def move():
     snakes = data["board"]["snakes"]
     food = data["board"]["food"][0]
 
+    num = 0
     for _ in range(10):
         if health > 20:
             move = random.choice(moves)
         else:
-            move = moves[data["turn"]%4]
+            move = moves[num % 4]
+            num + 1
         coord = moveAsCoord(move, head)
         if isValidMove(move, head, board, coord, snakes):
             break
