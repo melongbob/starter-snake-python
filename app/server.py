@@ -60,7 +60,7 @@ def move():
 
     num = 0
     for _ in range(10):
-        if health > 20:
+        if health < 20:
             move = random.choice(moves)
         else:
             move = moves[num % 4]
