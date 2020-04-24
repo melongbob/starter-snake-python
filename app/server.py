@@ -86,7 +86,7 @@ def moveAsCoord(move, head):
 def isValidMove(move, head, board, coord, snakes):
     if not isOffBoard(board, coord) and not isSnake(coord, snakes):
         return True
-    else
+    else:
         return False
 
 def isOffBoard(board, coord):
