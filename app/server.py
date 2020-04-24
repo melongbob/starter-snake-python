@@ -47,22 +47,23 @@ def move():
 
     # Choose a random direction to move in
     moves = ["up", "down", "right", "left"]
-    #move = random.choice(directions)
 
     # Shouts are messages sent to all the other snakes in the game.
     # Shouts are not displayed on the game board.
     shout = "I am Curly the snake!"
 
     head = data["you"]["body"][0]
+    board = data["board"]
     snakes = data["board"]["snakes"]
     food = data["board"]["food"][0]
 
-    ########
-    for move in moves :
-        coord = moveAsCoord(move, head)
-        if not isOffBoard(data, coord) and not isSnake(coord, snakes):
-            response = {"move": move, "shout": shout}
-            break  
+    coord = moveAsCoord(move, head)
+    for _ in range(10):
+        move = random.choice(directions)
+        if isValidMove(move, head, board, coord, snakes):
+            break
+            
+    response = {"move": move, "shout": shout}        
 
     print("MOVE:", json.dumps(data))
 
@@ -82,11 +83,17 @@ def moveAsCoord(move, head):
     elif move == "left":
         return {"x": head["x"] - 1, "y": head["y"]}
 
-def isOffBoard(data, coord):
+def isValidMove(move, head, board, coord, snakes):
+    if not isOffBoard(board, coord) and not isSnake(coord, snakes):
+        return True
+    else
+        return False
+
+def isOffBoard(board, coord):
     if coord["x"] < 0: return True
     if coord["y"] < 0: return True
-    if coord["y"] >= data["board"]["height"]: return True
-    if coord["x"] >= data["board"]["width"]: return True
+    if coord["y"] >= board["height"]: return True
+    if coord["x"] >= board["width"]: return True
     return False
 
 def isSnake(coord, snakes):
