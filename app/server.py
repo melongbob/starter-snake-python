@@ -81,6 +81,8 @@ def isOffBoard(move, head):
             return {x: head["x"] + 1, y: head["y"]};
         case "left":
             return {x: head["x"] - 1, y: head["y"]};
+        default:
+            return {x: head["x"], y: head["y"] - 1};
     }
 
 def isNeck(move, neck):
