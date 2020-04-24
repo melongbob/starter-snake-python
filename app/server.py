@@ -72,13 +72,13 @@ def move():
 
 def moveAsCoord(move, head):
     if move == "up":
-        return {x: head["x"], y: head["y"] - 1}
+        return {"x": head["x"], "y": head["y"] - 1}
     elif move == "down":
-        return {x: head["x"], y: head["y"] + 1}
+        return {"x": head["x"], "y": head["y"] + 1}
     elif move == "right":
-        return {x: head["x"] + 1, y: head["y"]}
+        return {"x": head["x"] + 1, "y": head["y"]}
     elif move == "left":
-        return {x: head["x"] - 1, y: head["y"]}
+        return {"x": head["x"] - 1, "y": head["y"]}
 
 def isOffBoard(data, coord):
     if coord["x"] < 0: return true
