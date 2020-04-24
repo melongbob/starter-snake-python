@@ -55,7 +55,7 @@ def move():
     for move in moves :
         coord = moveAsCoord(move, head)
         if not isOffBoard(move, head) \
-            not isNeck(move, neck) :
+           and not isNeck(move, neck) :
             return {move: move}
 
     print("MOVE:", json.dumps(data))
