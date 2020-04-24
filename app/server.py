@@ -72,7 +72,7 @@ def move():
     )
 
 def isOffBoard(move, head):
-    switch(move):
+    switch(move){
         case 'up':
             return {x: head["x"], y: head["y"] - 1}
         case 'down':
@@ -81,7 +81,8 @@ def isOffBoard(move, head):
             return {x: head["x"] + 1, y: head["y"]}
         case 'left':
             return {x: head["x"] - 1, y: head["y"]}
-
+    }
+    
 def isNeck(move, neck):
     return move["x"] == neck["x"] and move["y"] == neck["y"]
 
